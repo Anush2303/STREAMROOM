@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamRoom</title>
+    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@100;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="app.css">
+    <style>
+        div#video_player_box{background:rgb(0, 0, 0);}
+        div#video_controls_bar{background: #333;padding:20px; color:#CCC;}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark" style="padding-right: 2em;">
+        <div class="logo"><img src="images/logofull.png" alt="logo" width="200" style="padding: 1em 1em;"> </div>
+        <ul>
+            <li> <a href="/landingpage">Home</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col col-sm-12 col-md-9 col-lg-8" id="video_player_box">
+                <video id="my_video" style="height:80%;width:100%;">
+                    Your browser does not suppoert video tag
+                </video>
+                  <div id="video_controls_bar" style="position: relative;">
+                    <button id="playpausebtn" class="btn btn-outline-danger">Play</button>
+                    <input id="seekslider"  type="range" min="0" max="100" value="0" step="1">
+                    <span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span>
+                    <button id="mutebtn" class="btn btn-outline-danger">Mute</button>
+                    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                    <button class="btn btn-outline-danger" onclick="goFullscreen('my_video'); return false">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                  </div>
+                  <input type="file" id="photo" class="btn btn-outline-danger">
+                  <button id="btnn" class="btn btn-outline-danger">upload video</button>
+              </div>
+              <div class="col col-sm-12 col-md-3 col-lg-4 bg-light border">
+              <br>
+              <div id="buttoncont">
+                    <button type="button" onclick="getcode()" class="btn btn-outline-danger">Get Room Code</button>
+                </div>
+                <br>
+                <br>
+                <div id="buttoncont">
+                    <form action="/landingpage" method="">
+                    <button type="submit"  class="btn btn-outline-danger">Leave Room</button>
+                    </form>
+                </div>
+                <br>
+                <h3 id="heading">Members</h3>
+                <div class="px-4 d-none d-md-block">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <input type="text" class="form-control my-3" placeholder="Username" id="username">
+                        </div>
+                    </div>
+                </div>
+            <h1 class="h3 mb-3 text-Black" id="heading" style="padding-top: 1em;">Messages</h1>
+            <div class="card">
+            <div class="row g-0">
+            <div class="col-12">
+            <div class="position-relative">
+                        <div class="chat-messages p-4" style="height: 30vh;" id="msg-container">
+                        </div>
+                </div>
+                <div class="flex-grow-0 py-3 px-4 border-top">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="msgBox" placeholder="Type your message">
+                            <button class="btn btn-primary" onClick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <footer class="text-center text-white" style="background-color: #706c61">
+        <div class="container p-4 pb-0">
+            <section class="mb-0" style="padding-bottom: 1em;">
+               <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" style="border-radius: 50%;"><i
+                        class="fab fa-instagram"></i></a>
+              <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" style="border-radius: 50%;"><i
+                        class="fab fa-linkedin-in"></i></a>
+              <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button" style="border-radius: 50%;"><i
+                        class="fab fa-github"></i></a>
+            </section>
+        </div>
+    </footer>
+    <!-- <link rel="stylesheet" href="bootstrap/js/bootstrap.min.js"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="javasc.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    var socket = io();
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var c = url.searchParams.get("id");
+    console.log("CODE: ", c);
+    socket.emit('join', c);
+    socket.on('chat message', function(msg) {
+        console.log("received message: ", msg);
+        $('#msg-container').append(`
+        <div class="chat-message-left pb-4">
+            <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                <div class="font-weight-bold mb-1">${msg.user ?? 'User'}</div>
+                ${msg.message}
+            </div>
+        </div>
+        `);
+    });
+    </script>
+    <script type="text/javascript">
+        function goFullscreen(id) {
+          var element = document.getElementById(id);       
+          if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+            this.controls=false;
+          } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+            this.controls=false;
+          }  
+        }
+        </script>
+    <script>
+        function sendMessage(){
+            let msg = $('#msgBox').val();
+            let obj = {
+                user: $('#username').val() == '' ? 'Anonymous' : $('#username').val(),
+                message: msg,
+                room: c
+            };
+            socket.emit('chat message', obj);
+            $('#msg-container').append(`
+            <div class="chat-message-right pb-4">
+                <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                    <div class="font-weight-bold mb-1">${obj.user ?? 'User'}</div>
+                    ${obj.message}
+                </div>
+            </div>
+            `);
+            $('#msgBox').val('');
+        }
+    </script>
+    <script>
+        function getcode(){
+            alert("Your room code is "+c);
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    <script>
+                var find="none";
+                var firebaseConfig = {
+                apiKey: "AIzaSyDPTxtR1C2JfMhwRaj03fIOQuhN4cCwFRQ",
+                authDomain: "first-project-bfd22.firebaseapp.com",
+                projectId: "first-project-bfd22",
+                storageBucket: "first-project-bfd22.appspot.com",
+                messagingSenderId: "736537096617",
+                appId: "1:736537096617:web:fe93f307226632d3a1d4b8",
+                measurementId: "G-VYW2PB6MJS"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+            console.log(firebase);
+            const buttonns=document.querySelector("#btnn");
+            buttonns.addEventListener("click",(e)=>{
+                // console.log("entered");
+                const file=document.querySelector("#photo").files[0];
+                const fsize = file.size;
+                const divisor=(1024*1024);
+                const filesize = Math.round((fsize /divisor));
+                console.log(filesize);
+                if(filesize>100){
+                       alert("The uploaded file size is greater than 100 Mb limit");
+                       return;
+                }
+                if(find!="none"){
+                    var fileRef = firebase.storage().refFromURL(find);
+                    fileRef.delete().then(function () {
+  
+                            // File deleted successfully
+                            console.log("File Deleted")
+                            }).catch(function (error) {
+                            // Some Error occurred
+                            });
+                }
+                const ref=firebase.storage().ref();
+                const name=new Date()+'-'+ file.name;
+                const metadata={
+                    contentType: file.type
+                }
+                const task= ref.child(name).put(file,metadata);
+                task.then(snapshot=>snapshot.ref.getDownloadURL()).then(url=>{
+                    console.log(url);
+                    alert("video upload successful");
+                    find=url;
+                    vid.src=url;
+                    fire();
+                })
+            })
+            function fire(){
+                socket.emit("upload",{
+                            message: find,
+                            room: c
+                            });
+            }
+                     var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider;
+                        function intializePlayer(){
+                            // Set object references
+                            vid = document.getElementById("my_video");
+                            playbtn = document.getElementById("playpausebtn");
+                            seekslider = document.getElementById("seekslider");
+                            curtimetext = document.getElementById("curtimetext");
+                            durtimetext = document.getElementById("durtimetext");
+                            mutebtn = document.getElementById("mutebtn");
+                            volumeslider = document.getElementById("volumeslider");
+                            // Add event listeners
+                            playbtn.addEventListener("click",playPause,false);
+                            seekslider.addEventListener("change",vidSeek,false);
+                            vid.addEventListener("timeupdate",seektimeupdate,false);
+                            mutebtn.addEventListener("click",vidmute,false);
+                            volumeslider.addEventListener("change",setvolume,false);
+                        }window.onload = intializePlayer;
+                        function playPause(){
+                            if(vid.paused){
+                                vid.play();
+                                playbtn.innerHTML = "Pause";
+                                controls=false;
+                                socket.emit("stream",{
+                                    message:"1",
+                                    room: c
+                                });
+                            } else {
+                                vid.pause();
+                                playbtn.innerHTML = "Play";
+                                controls=false;
+                                socket.emit("stream",{
+                                    message:"0",
+                                    room: c
+                                });
+                            }
+                        }
+                        function vidSeek(){
+                            var seekto = vid.duration * (seekslider.value / 100);
+                            vid.currentTime = seekto;
+                            socket.emit("seek",{
+                                        message: seekto,
+                                        room: c
+                                        });
+                        }
+                        function seektimeupdate(){
+                            var nt = vid.currentTime * (100 / vid.duration);
+                            seekslider.value = nt;
+                            var curmins = Math.floor(vid.currentTime / 60);
+                            var cursecs = Math.floor(vid.currentTime - curmins * 60);
+                            var durmins = Math.floor(vid.duration / 60);
+                            var dursecs = Math.floor(vid.duration - durmins * 60);
+                            if(cursecs < 10){ cursecs = "0"+cursecs; }
+                            if(dursecs < 10){ dursecs = "0"+dursecs; }
+                            if(curmins < 10){ curmins = "0"+curmins; }
+                            if(durmins < 10){ durmins = "0"+durmins; }
+                            curtimetext.innerHTML = curmins+":"+cursecs;
+                            durtimetext.innerHTML = durmins+":"+dursecs;
+                        }
+                        function vidmute(){
+                            if(vid.muted){
+                                vid.muted = false;
+                                mutebtn.innerHTML = "Mute";
+                            } else {
+                                vid.muted = true;
+                                mutebtn.innerHTML = "Unmute";
+                            }
+                        }
+                        function setvolume(){
+                            vid.volume = volumeslider.value / 100;
+                        }
+                       </script>
+                       <script>
+                        socket.on("stream",(data)=>{
+                            if(data.message=="1"){
+                                vid.play();
+                                playbtn.innerHTML = "Pause";
+                            }
+                            else{
+                                vid.pause();
+                                playbtn.innerHTML = "Play";
+                            }
+                        });
+                        socket.on("seek",(data)=>{
+                            console.log(data.message);
+                            vid.currentTime=data.message;
+                        })
+                        socket.on("source",(data)=>{
+                        find=data.message;
+                        console.log(data);
+                        justdoit(data);
+                        })
+                        function justdoit(data){
+                            console.log(data);
+                            vid.src=data.message;
+                        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+html body{
+    overflow-x: hidden;
+  }
+  .container-fluid h1{
+  color: white;
+  font-size:35px;
+  font-family: "Audiowide", sans-serif;
+  }
+  a .nav-brand{
+      font-size:32px;
+      color:white;
+  }
+  .navbar-brand>img {
+    height: 80px;
+    width:100px;
+    border-radius:30%;
+    color:red;
+  }
+  body{
+      width:100%;
+      height:100%;
+      background-color: black;
+      background-image: linear-gradient(to right,black,black,#646464);
+  }
+  .top{
+      margin-top:45px;
+      margin-left: 2%;
+  }
+  .content p{
+      color:white;
+      padding:10px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 40px;
+      line-height: 50px;
+  }
+  .subheading p{
+      color: #E1D5D4;
+      font-size:26px;
+      margin-left:2%;
+  }
+  .poster img{
+  position: relative;
+  width: 450px;
+  height: auto;
+  border-radius: 48px;
+  }
+  .gallery{
+  margin:auto;
+  margin-top:140px;
+  width: 210px;
+  height: 280px;
+  position: relative;
+  perspective: 1000px;
+  }
+  #carousel{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: rotation 20s infinite linear;
+  }
+  #carousel:hover{
+  animation-play-state: paused;
+  }
+  #carousel figure{
+  display: block;
+  position: absolute;
+  width: 90%;
+  height: 78%;
+  top: 10px;
+  background: black;
+  overflow: hidden;
+  border: solid 5px black;
+  }
+  #carousel figure:nth-child(1) {transform: rotateY(0deg) translateZ(288px);}
+  #carousel figure:nth-child(2) { transform: rotateY(40deg) translateZ(288px);}
+  #carousel figure:nth-child(3) { transform: rotateY(80deg) translateZ(288px);}
+  #carousel figure:nth-child(4) { transform: rotateY(120deg) translateZ(288px);}
+  #carousel figure:nth-child(5) { transform: rotateY(160deg) translateZ(288px);}
+  #carousel figure:nth-child(6) { transform: rotateY(200deg) translateZ(288px);}
+  #carousel figure:nth-child(7) { transform: rotateY(240deg) translateZ(288px);}
+  #carousel figure:nth-child(8) { transform: rotateY(280deg) translateZ(288px);}
+  #carousel figure:nth-child(9) { transform: rotateY(320deg) translateZ(288px);}
+  #carousel figure:nth-child(10){ transform: rotateY(360deg)translateZ(288px);}
+  #carousel img{
+  cursor: pointer;
+  transition: all .5s ease;
+  width:100%;
+  }
+  @keyframes rotation{
+  from{
+  transform: rotateY(0deg);
+  }
+  to{
+  transform: rotateY(360deg);
+  }
+  }
+  .rings{
+      margin-left:15%;
+      margin-top:15px;
+  }
+  .wrap {
+      height: 100%;
+      display: flex;
+    }
+    .buttonring {
+      min-width: 350px;
+      min-height: 60px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      font-weight: 700;
+      color: #313133;
+      background: #101020;
+      background: linear-gradient(90deg, black 0%, black 100%);
+      border: none;
+      border-radius: 1000px;
+      box-shadow: 12px 12px 24px rgba(255, 255, 255, 0.64);
+      transition: all 0.3s ease-in-out 0s;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      padding: 10px;
+      }
+    .buttonring::before {
+      content: '';
+      border-radius: 1000px;
+      min-width: calc(410px + 12px);
+      min-height: calc(60px + 12px);
+      border: 6px solid #ffffff;
+      box-shadow: 0 0 60px rgb(255, 255, 255);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: all .3s ease-in-out 0s;
+    }
+    .buttonring:hover, .buttonring:focus {
+      color: #313133;
+      transform: translateY(-6px);
+    }
+    .buttonring:hover::before, .buttonring:focus::before {
+      opacity: 1;
+    }
+    .buttonring::after {
+      content: '';
+      width: 50px; height: 30px;
+      border-radius: 100%;
+      border: 6px solid #ffffff;
+      position: absolute;
+      z-index: 999;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ring 1s infinite;
+    }
+    .buttonring:hover::after, .buttonring:focus::after {
+      animation: none;
+      display: none;
+    }
+    @keyframes ring {
+      0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+      }
+      100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+      }
+    }
+    .btna:visited,
+    .btna:link,
+    input[type=submit]{
+      text-align: center;
+      position: relative;
+      text-transform:uppercase;
+      color:grey;
+      background-color:white;
+      text-decoration: none;
+      font-weight:500;
+      background-size: 250%;
+      padding:10px;
+      background-image: linear-gradient(120deg,transparent 0%,transparent 50%, black 50%);
+      transition: all .4s;
+      cursor: pointer;
+      border: 2px solid black;
+    }
+    .btna:hover,
+    .btna:active,
+    input[type=submit]{
+       background-position: 100%;
+       color:white;
+       transform: translateX(1rem);
+    }

@@ -1,0 +1,137 @@
+body{
+    background-image: url(images//image1.jpg);
+}
+.container{
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    width: 500px;
+    height: 450px;
+    margin-top:10%;
+    padding:15px;
+}
+.container .input-container{
+    margin:10px;
+    padding: 10px;
+}
+.fa-eye{
+   margin-left: -23px;
+   cursor: pointer;
+}
+.fa-eye:hover{
+    color: gray;
+}
+.fa-user {
+   color: ivory;
+}
+.fa-key{
+   color: ivory;
+}
+.container .input-container .input{
+    width: 200px;;
+}
+.container p a{
+   font-size: 11px;
+   margin-left: -85px;
+   cursor: pointer;
+}
+.container p{
+    display: inline;
+    color: ivory;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container .para a{
+    display: inline;
+    margin-right: -85px;
+    margin-left: 0px;
+}
+div .icons{
+    display: inline;
+}
+.fa-facebook-square{   
+    margin: 7px;
+    padding: 7px;
+    cursor: pointer;
+    color: ivory;
+}
+.fa-twitter-square{
+    margin: 7px;
+    padding: 7px;
+    cursor: pointer;
+    color: ivory;
+}
+.fa-google-plus-square{
+    margin: 7px;
+    padding: 7px;
+    cursor: pointer;
+    color: ivory;
+}
+.fa-google-plus-square:hover{
+    color: gray;
+}
+.fa-twitter-square:hover{
+    color: gray;
+}
+.fa-facebook-square:hover{
+    color: gray;
+}
+.container h2{
+    font-family: Arial, Helvetica, sans-serif;
+    color: ivory;
+    margin-bottom: 30px;;
+}
+.container .input-container .remember{
+    color: ivory;
+}
+.container .submit input{
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    cursor: pointer;
+}
+.container .submit input:hover{
+    color:gray;
+}
+form h6{
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+a:hover{
+   color: gray;
+}
+a{
+    font-family: Arial, Helvetica, sans-serif;
+    color: ivory;
+    text-decoration: none;
+}
+@media screen and (max-width: 600px) {
+    .container{
+        margin-left: 5%;
+    }
+    body{
+        background-size: cover;
+    }
+  }
+  .btna:visited,
+  .btna:link,
+  input[type=submit]{
+    text-align: center;
+    position: relative;
+    text-transform:uppercase;
+    color:grey;
+    background-color:white;
+    text-decoration: none;
+    font-weight:500;
+    background-size: 250%;
+    padding:10px;
+    background-image: linear-gradient(120deg,transparent 0%,transparent 50%, black 50%);
+    transition: all .4s;
+    cursor: pointer;
+    border: 2px solid black;
+  }
+  .btna:hover,
+  .btna:active,
+  input[type=submit]{
+     background-position: 100%;
+     color:white;
+     transform: translateX(1rem);
+  }
